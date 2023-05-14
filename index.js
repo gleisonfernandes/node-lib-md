@@ -9,12 +9,10 @@ const trataErro = (erro) => {
 
 const pegaArquivo = (caminhoDoArquivo) => {
     const encoding = 'utf-8';
-    fs.readFile(caminhoDoArquivo, encoding, (erro, texto)=>{
-        if(erro){
-            trataErro(erro);
-        }
-        log(chalk.green(texto));
-    })
+    fs.promises
+      .readFile(caminhoDoArquivo, encoding)
+      .then((texto) => log(chalk.green(texto)))
+      .catch(trataErro)
 }
 
 pegaArquivo('./arquivos/texto.md');
