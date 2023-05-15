@@ -18,14 +18,12 @@ const pegaArquivo = async (caminhoDoArquivo) => {
     try {
         const encoding = 'utf-8';
         const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
-        log(extraiLinks(texto));
+        return extraiLinks(texto);
     }
     catch(erro){
         trataErro(erro);
     }
 }
 
-pegaArquivo('./arquivos/texto.md');
-
-// Expresão Regular => /\[([^[\]]*?)\]\((https?[^\s?]*)\)/gm;
+export default pegaArquivo;
 
