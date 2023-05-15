@@ -26,4 +26,3 @@ const pegaArquivo = async (caminhoDoArquivo) => {
 }
 
 export default pegaArquivo;
-
