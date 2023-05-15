@@ -3,6 +3,13 @@ import chalk from 'chalk';
 
 const log = console.log;
 
+const extraiLinks = (texto) => {
+    const regex = /\[([^[\]]*?)\]\((https?[^\s?]*)\)/gm;
+    const captura = [...texto.matchAll(regex)];
+    const resultados = captura.map(captura => ({[captura[1]]: [captura[2]]}));
+    return resultados;
+}
+
 const trataErro = (erro) => {
     throw new Error(chalk.red(erro.code, 'Não há arquivo no diretório'));
 }
@@ -11,7 +18,7 @@ const pegaArquivo = async (caminhoDoArquivo) => {
     try {
         const encoding = 'utf-8';
         const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
-        log(chalk.green(texto));
+        log(extraiLinks(texto));
     }
     catch(erro){
         trataErro(erro);
@@ -19,4 +26,6 @@ const pegaArquivo = async (caminhoDoArquivo) => {
 }
 
 pegaArquivo('./arquivos/texto.md');
+
+// Expresão Regular => /\[([^[\]]*?)\]\((https?[^\s?]*)\)/gm;
 
