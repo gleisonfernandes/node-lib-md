@@ -7,7 +7,7 @@ const extraiLinks = (texto) => {
     const regex = /\[([^[\]]*?)\]\((https?[^\s?]*)\)/gm;
     const captura = [...texto.matchAll(regex)];
     const resultados = captura.map(captura => ({[captura[1]]: [captura[2]]}));
-    return resultados;
+    return resultados.length !== 0 ? resultados : 'Não há Link do arquivo';
 }
 
 const trataErro = (erro) => {
