@@ -5,8 +5,12 @@ import pegaArquivo from "./index.js";
 
 const caminho = process.argv;
 
-const imprimeLista = (resultado, nomeDoArquivo) => {
-    console.log(chalk.yellow('Lista de Links'), resultado);
+const imprimeLista = (resultado, identificador = '') => {
+    console.log(
+        chalk.yellow('Lista de Links'),
+        chalk.black.bgGreen(identificador),
+        resultado
+    );
 }
 
 const processaTexto = async (argumentos) =>{
@@ -28,7 +32,7 @@ const processaTexto = async (argumentos) =>{
         const arquivos = await fs.promises.readdir(caminho);
         arquivos.forEach(async (nomeDeArquivo) => {
             const lista = await pegaArquivo(`${caminho}/${nomeDeArquivo}`);
-            imprimeLista(lista);
+            imprimeLista(lista, nomeDeArquivo);
         })
     }
 }
